@@ -1,12 +1,14 @@
-import React from 'react'
-import { useMyHook } from 'use-synced-local-storage'
+import React from "react";
+import { useSyncedLocalStorage } from "use-synced-local-storage";
 
 const App = () => {
-  const example = useMyHook()
+  const [storage, setStorage] = useSyncedLocalStorage("test", 1);
+
   return (
-    <div>
-      {example}
-    </div>
-  )
-}
-export default App
+    <>
+      {storage}
+      <button onClick={() => setStorage(storage + 1)}>click me</button>
+    </>
+  );
+};
+export default App;
