@@ -13,42 +13,20 @@ npm install --save use-synced-local-storage
 ## Usage
 
 ```jsx
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSyncedLocalStorage } from "use-synced-local-storage";
 
-export const useSyncedLocalStorage = (key, initialValue) => {
-  const checkGetLocalValue = () => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
-  };
+const App = () => {
+  const [storage, setStorage] = useSyncedLocalStorage("storage-key", 1);
 
-  const [storage, setStorage] = useState(checkGetLocalValue());
-
-  const setStorageContent = (value) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storage) : value;
-      setStorage(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("storage", () => setStorage(checkGetLocalValue()));
-    return () => {
-      window.removeEventListener("storage", () =>
-        setStorage(checkGetLocalValue())
-      );
-    };
-  }, []);
-
-  return [storage, setStorageContent];
+  return (
+    <>
+      {storage}
+      <button onClick={() => setStorage(storage + 1)}>click me</button>
+    </>
+  );
 };
+export default App;
 ```
 
 ## License
