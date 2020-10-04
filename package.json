@@ -2,6 +2,11 @@
   "name": "use-synced-local-storage",
   "version": "1.0.1",
   "description": "Custom react hook for cross-synced local storage",
+  "keywords": [
+    "local storage",
+    "hook",
+    "sync"
+  ],
   "author": "berkeatac",
   "license": "MIT",
   "repository": "berkeatac/use-synced-local-storage",
